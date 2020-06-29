@@ -8,7 +8,7 @@ export const getDecks = async ()=>{
     const storeResults = await AsyncStorage.getItem(storageKey);
 
     if (storeResults === null) {
-      AsyncStorage.setItem(storageKey, JSON.stringify(decks));
+      AsyncStorage.setItem(storageKey, JSON.stringify(decksData));
     }
 
     return storeResults === null ? decksData : JSON.parse(storeResults);
