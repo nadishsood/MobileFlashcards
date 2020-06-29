@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import DeckList from "./components/DeckList";
-import DeckDetail from "./components/DeckList";
+import DeckDetail from "./components/DeckDetail";
 import NewCard from "./components/NewCard";
 import NewDeck from "./components/NewDeck";
 import ResetApp from "./components/ResetApp";
@@ -23,7 +23,7 @@ import { Provider } from "react-redux";
 
 const store = createStore(
   reducers,
-  applyMiddleware(thunk, logger)
+  applyMiddleware(thunk)
 );
 
 

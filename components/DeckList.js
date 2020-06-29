@@ -14,16 +14,25 @@ import { connect } from "react-redux";
 import Constants from "expo-constants";
 
 
-function Item({ title, numberOfCards }) {
+function Item({ title, numberOfCards, item, navigation }) {
+
   return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-      <Text >{`Number of Cards: ${numberOfCards}`}</Text>
-    </View>
+    <TouchableOpacity onPress={() => handleDeckPress(item, navigation)}>
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+        <Text>{`Number of Cards: ${numberOfCards}`}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
+const handleDeckPress = (item, navigation) =>{
+  navigation.push('DeckDetail');
+}
+
 class DeckList extends React.Component {
+
+
 
   componentDidMount(){
     this.props.fetchDecks();
@@ -39,15 +48,18 @@ class DeckList extends React.Component {
            <SafeAreaView style={styles.container}>
              <FlatList
                data={decksArray}
-               renderItem={({ item }) => <Item title={item.title} numberOfCards = {item.questions.length} />}
+               renderItem={({ item }) => 
+                <Item title={item.title} 
+                      numberOfCards = {item.questions.length} 
+                      item={item}
+                      navigation={this.props.navigation}
+                />}
                keyExtractor={item => item.title}
              />
            </SafeAreaView>
          
        );
-    
-   
-  }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -63,6 +75,29 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32
+  }, 
+
+
+  btnContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // alignItems: 'center',
+    // width: '100%',
+    marginBottom: 20
+  },
+  btn: {
+    width: 100,
+    height: 50,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    justifyContent: `center`,
+    alignItems: `center`
+  },
+  btnText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white'
   }
 });
 
