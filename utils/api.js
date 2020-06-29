@@ -26,25 +26,25 @@ export const getDeck = async (id) =>{
     }
 }
 
-export const saveDeckTitle=(title)=>{
-    try{
-        AsyncStorage.mergeItem(
-            storageKey, 
-            JSON.stringify({
-                [title]: {
-                    title, 
-                    questions: []
-                }
-            })
-            ).then((res)=>{
-                
-            }, (e)=>{
-                console.log(e);
-            });
-    }catch(e){
-        console.log(e);
-    }
-}
+
+export const saveDeckTitle = async (title) => {
+  try {
+    const res = await AsyncStorage.mergeItem(
+      storageKey,
+      JSON.stringify({
+        [title]: {
+          title,
+          questions: []
+        }
+      }));
+
+      const res1 = await AsyncStorage.getItem(storageKey);
+      
+      return JSON.parse(res1)[title];
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const addCardToDeck= async (title, card)=>{
     try{

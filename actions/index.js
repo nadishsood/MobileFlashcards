@@ -5,3 +5,16 @@ export const fetchDecks = () => async dispatch => {
   dispatch({ type: "FETCH_DECKS", payload: response });
 };
 
+export const createNewDeck = (title) => async dispatch => {
+   const response = await server.saveDeckTitle(title);
+    dispatch(fetchDecks());
+    dispatch({ type: "NEW_DECK", payload: response });
+};
+
+export const resetDecksAction = () => async dispatch =>{
+    await server.resetDecks();
+    dispatch(fetchDecks());
+}
+
+
+

@@ -27,7 +27,9 @@ function Item({ title, numberOfCards, item, navigation }) {
 }
 
 const handleDeckPress = (item, navigation) =>{
-  navigation.push('DeckDetail');
+  navigation.push('DeckDetail', {
+    item
+  });
 }
 
 class DeckList extends React.Component {
