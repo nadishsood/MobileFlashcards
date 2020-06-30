@@ -2,10 +2,18 @@ import React from "react";
 import { Button, TextInput, View, StyleSheet } from "react-native";
 import { Formik } from "formik";
 import { connect } from "react-redux";
+import { addCardToDeck } from './../actions';
 
 class NewCard extends React.Component {
   handleSubmit = (values, resetForm) => {
-    console.log(values);
+    let title = this.props.route.params.item.title;
+    this.props.addCardToDeck(title, {
+      answer: values.answer , 
+      question: values.question , 
+    })
+    this.props.navigation.navigate("DeckDetail", {
+      item: this.props.decks[`${title}`]
+    })
     resetForm({ values: "" });
   };
 
@@ -50,7 +58,7 @@ const mapStateToProps = (state, ownProps) => {
     decks: state.decks.decks
   };
 };
-export default connect(mapStateToProps, {  })(NewCard);
+export default connect(mapStateToProps, { addCardToDeck })(NewCard);
 
 const styles = StyleSheet.create({
   container: {

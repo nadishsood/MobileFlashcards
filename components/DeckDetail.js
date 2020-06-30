@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
-export default class DeckDetail extends React.Component {
+class DeckDetail extends React.Component {
   addCard=()=>{
     this.props.navigation.navigate("NewCard", {
       item: this.props.route.params.item
@@ -9,10 +10,13 @@ export default class DeckDetail extends React.Component {
   }
   render() {
     const { item } = this.props.route.params;
-    return (
+    const title = item.title;
+    const deck = this.props.decks[`${title}`]
+    
+  return (
       <View>
-        <Text style={styles.header}>{item.title}</Text>
-        <Text>{`${item.questions.length} cards`}</Text>
+        <Text style={styles.header}>{deck.title}</Text>
+        <Text>{`${deck.questions.length} cards`}</Text>
         <View style={styles.btnContainer}>
           <TouchableOpacity style={styles.btn} onPress={this.addCard}>
             <Text style={styles.btnText}>Add Card</Text>
@@ -28,6 +32,13 @@ export default class DeckDetail extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    decks: state.decks.decks
+  };
+};
+export default connect(mapStateToProps, {  })(DeckDetail);
 
 const styles = StyleSheet.create({
   header:{

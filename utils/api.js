@@ -58,6 +58,8 @@ export const addCardToDeck= async (title, card)=>{
                 }
             })
         )
+        const res2 = await AsyncStorage.getItem(storageKey);
+        return JSON.parse(res2)[title];
     }catch(e){
         console.log(e);
     }
