@@ -46,6 +46,7 @@ const Tab = createBottomTabNavigator();
       return (
         <Stack.Navigator>
           <Stack.Screen name="NewDeck" component={NewDeck} />
+          <Stack.Screen name="DeckDetail" component={DeckDetail} />
         </Stack.Navigator>
       );
     };

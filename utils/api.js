@@ -26,7 +26,7 @@ export const getDeck = async (id) =>{
     }
 }
 
-
+//don't touch finalized. 
 export const saveDeckTitle = async (title) => {
   try {
     const res = await AsyncStorage.mergeItem(
@@ -45,6 +45,7 @@ export const saveDeckTitle = async (title) => {
     console.log(e);
   }
 };
+
 
 export const addCardToDeck= async (title, card)=>{
     try{
