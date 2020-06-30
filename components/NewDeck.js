@@ -5,18 +5,26 @@ import { createNewDeck } from './../actions';
 import { connect } from "react-redux";
 
 class NewDeck extends React.Component {
-  handleSubmit=(title)=>{
+  handleSubmit=(title, resetForm)=>{
     this.props.createNewDeck(title);
+    this.props.navigation.navigate("DeckDetail", {
+      item: {
+        title, 
+        questions:[]
+      }
+    })
+   resetForm({values: ""})
 
   }
+
 
   render() {
     return (
       <View style={styles.container}>
         <Formik
           initialValues={{ title: "" }}
-          onSubmit={values => {
-             this.handleSubmit(values.title);
+          onSubmit={(values, {resetForm}) => {
+             this.handleSubmit(values.title, resetForm);
           }}
         >
           {props => (
