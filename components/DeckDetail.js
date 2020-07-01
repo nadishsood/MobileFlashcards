@@ -2,34 +2,61 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import { deleteDeck } from "./../actions";
+
 class DeckDetail extends React.Component {
   addCard=()=>{
     this.props.navigation.navigate("NewCard", {
       item: this.props.route.params.item
     })
   }
-  render() {
+  handleDeleteDeck=(title)=>{
+    console.log(title);
+    if(title !== undefined){
+      this.props.deleteDeck(title);
+
+      this.props.navigation.navigate("DeckList");
+    }
+  }
+  
+render() {
+    let title ; 
+    let deck;
+
     const { item } = this.props.route.params;
-    const title = item.title;
-    const deck = this.props.decks[`${title}`]
+    if(item){
+      title = item.title;
+      deck = this.props.decks[`${title}`];
+    }
     
-  return (
-      <View>
-        <Text style={styles.header}>{deck.title}</Text>
-        <Text>{`${deck.questions.length} cards`}</Text>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btn} onPress={this.addCard}>
-            <Text style={styles.btnText}>Add Card</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn} onPress={this.handleResetDecks}>
-            <Text style={styles.btnText}>Start Quiz</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn} onPress={this.handleResetDecks}>
-            <Text style={styles.btnText}>Delete Deck</Text>
-          </TouchableOpacity>
+    if(deck){
+      return (
+        <View>
+          <Text style={styles.header}>{deck.title}</Text>
+          <Text>{`${deck.questions.length} cards`}</Text>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity style={styles.btn} onPress={this.addCard}>
+              <Text style={styles.btnText}>Add Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={this.handleResetDecks}
+            >
+              <Text style={styles.btnText}>Start Quiz</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => this.handleDeleteDeck(title)}
+            >
+              <Text style={styles.btnText}>Delete Deck</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    );
+      );
+    }else{
+      return <View><Text>dsfsf</Text></View>
+    }
+  
   }
 }
 
@@ -38,7 +65,7 @@ const mapStateToProps = (state, ownProps) => {
     decks: state.decks.decks
   };
 };
-export default connect(mapStateToProps, {  })(DeckDetail);
+export default connect(mapStateToProps, { deleteDeck })(DeckDetail);
 
 const styles = StyleSheet.create({
   header:{

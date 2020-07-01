@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import decksData from './../database/data';
+import _ from 'lodash';
 
 const storageKey = "DECKS";
 
@@ -65,16 +66,18 @@ export const addCardToDeck= async (title, card)=>{
     }
 }
 
-export const removeDeck = async (key)=>{
-    try{
-        const res = await AsyncStorage.getItem(storageKey);
-        res = JSON.parse(res);
-        res[key] = undefined;
-        delete data[key];
+export async function removeDeck(key) {
+  try {
+    const results = await AsyncStorage.getItem(storageKey);
+    const data = JSON.parse(results);
+    const data1 = _.omit(data, [`${key}`]);
+    AsyncStorage.setItem(storageKey, JSON.stringify(data1));
 
-    }catch(e){
-        console.log(e);
-    }
+    const res3 = await AsyncStorage.getItem(storageKey);
+    return JSON.parse(res3);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export const resetDecks= async ()=>{

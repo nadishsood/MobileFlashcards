@@ -42,11 +42,14 @@ class DeckList extends React.Component {
 
   render() {
     const decks = this.props.decks;
-      let decksArray = [];
-      decksArray = Object.values(decks);
+      var decksArray = [];
+      if(decks){
+        decksArray = Object.values(decks);
+      }
+      
     
        return (
-           
+  
            <SafeAreaView style={styles.container}>
              <FlatList
                data={decksArray}

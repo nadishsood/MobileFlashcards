@@ -20,10 +20,14 @@ export const addCardToDeck = (title, card) => async dispatch => {
   const response = await server.addCardToDeck(title);
   dispatch(fetchDecks());
   dispatch({type: "ADD_CARD", payload: response })
-    //recieve new deck from api, send it to reducer, update that key in state
-    //congratulations
-//   dispatch(fetchDecks());
-//   dispatch({ type: "NEW_DECK", payload: response });
 };
+
+export const deleteDeck = (title) => async dispatch => {
+  const response = await server.removeDeck(title);
+  dispatch({ type: "DELETE_DECK", payload: response });
+  
+};
+
+
 
 
