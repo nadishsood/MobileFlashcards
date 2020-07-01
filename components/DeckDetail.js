@@ -11,16 +11,21 @@ class DeckDetail extends React.Component {
     })
   }
   handleDeleteDeck=(title)=>{
-    console.log(title);
     if(title !== undefined){
       this.props.deleteDeck(title);
 
       this.props.navigation.navigate("DeckList");
     }
   }
+
+  handleQuizClick = () =>{
+    this.props.navigation.navigate("Quiz", {
+      item: this.props.route.params.item
+    });
+  }
   
 render() {
-    let title ; 
+    let title; 
     let deck;
 
     const { item } = this.props.route.params;
@@ -40,7 +45,7 @@ render() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
-              onPress={this.handleResetDecks}
+              onPress={this.handleQuizClick}
             >
               <Text style={styles.btnText}>Start Quiz</Text>
             </TouchableOpacity>
