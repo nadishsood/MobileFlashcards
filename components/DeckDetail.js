@@ -19,8 +19,13 @@ class DeckDetail extends React.Component {
   }
 
   handleQuizClick = () =>{
+     const { item } = this.props.route.params;
+     if (item) {
+       title = item.title;
+       deck = this.props.decks[`${title}`];
+     }
     this.props.navigation.navigate("Quiz", {
-      item: this.props.route.params.item
+      item: deck
     });
   }
   

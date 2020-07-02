@@ -23,7 +23,7 @@ import { Provider } from "react-redux";
 
 const store = createStore(
   reducers,
-  applyMiddleware(thunk, logger)
+  applyMiddleware(thunk)
 );
 
 

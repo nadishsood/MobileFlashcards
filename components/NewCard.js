@@ -7,10 +7,11 @@ import { addCardToDeck } from './../actions';
 class NewCard extends React.Component {
   handleSubmit = (values, resetForm) => {
     let title = this.props.route.params.item.title;
-    this.props.addCardToDeck(title, {
-      answer: values.answer , 
-      question: values.question , 
-    })
+    let card = {
+      answer: values.answer,
+      question: values.question
+    };
+    this.props.addCardToDeck(title, card);
     this.props.navigation.navigate("DeckDetail", {
       item: this.props.decks[`${title}`]
     })

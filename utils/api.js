@@ -49,6 +49,7 @@ export const saveDeckTitle = async (title) => {
 
 
 export const addCardToDeck= async (title, card)=>{
+  console.log(card);
     try{
         const deckToAddTo = await getDeck(title);
         await AsyncStorage.mergeItem(
@@ -60,6 +61,7 @@ export const addCardToDeck= async (title, card)=>{
             })
         )
         const res2 = await AsyncStorage.getItem(storageKey);
+
         return JSON.parse(res2)[title];
     }catch(e){
         console.log(e);

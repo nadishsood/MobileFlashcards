@@ -1,7 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
 
-export default class Quiz extends React.Component {
+import { connect } from "react-redux";
+
+
+class Quiz extends React.Component {
 
   state = {
     cards: [], 
@@ -13,9 +16,9 @@ export default class Quiz extends React.Component {
   componentDidMount(){
     console.log("I got called");
     this.setState({
-      cards: this.props.route.params.item.questions, 
+      cards: this.props.deck.questions, 
       onQuestion: 0, 
-      totalQuestions: this.props.route.params.item.questions.length, 
+      totalQuestions: this.props.deck.questions.length, 
       cardDisplay: "question"
     });
   }
@@ -103,6 +106,14 @@ export default class Quiz extends React.Component {
 
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    deck: state.decks.decks[ownProps.route.params.item.title]
+  };
+};
+export default connect(mapStateToProps, { })(Quiz);
+
 
 const styles = StyleSheet.create({
   card: {

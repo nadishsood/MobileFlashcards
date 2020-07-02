@@ -17,7 +17,7 @@ export const resetDecksAction = () => async dispatch =>{
 }
 
 export const addCardToDeck = (title, card) => async dispatch => {
-  const response = await server.addCardToDeck(title);
+  const response = await server.addCardToDeck(title, card);
   dispatch(fetchDecks());
   dispatch({type: "ADD_CARD", payload: response })
 };

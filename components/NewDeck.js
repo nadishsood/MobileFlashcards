@@ -37,7 +37,7 @@ class NewDeck extends React.Component {
               />
               <Button
                 color="green"
-                title="Submit"
+                title="Create Deck"
                 onPress={props.handleSubmit}
               />
             </View>
