@@ -5,102 +5,108 @@ import { connect } from "react-redux";
 
 
 class Quiz extends React.Component {
-
   state = {
-    cards: [], 
-    onQuestion: 0, 
-    totalQuestions: null, 
-    correctAnswers : 0, 
+    cards: [],
+    onQuestion: 0,
+    totalQuestions: null,
+    correctAnswers: 0,
     cardDisplay: null
-  }
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     console.log("I got called");
     this.setState({
-      cards: this.props.deck.questions, 
-      onQuestion: 0, 
-      totalQuestions: this.props.deck.questions.length, 
-      
+      cards: this.props.deck.questions,
+      onQuestion: 0,
+      totalQuestions: this.props.deck.questions.length
     });
   }
 
-  viewAnswerHandler=()=>{
+  viewAnswerHandler = () => {
     this.setState({
       cardDisplay: "answer"
-    })
-  }
+    });
+  };
 
-  restartQuizHandler=()=>{
+  restartQuizHandler = () => {
     this.setState({
       onQuestion: 0,
       correctAnswers: 0,
       cardDisplay: "question"
-    })
-  }
+    });
+  };
 
-  handleUserResponse=(responseWas)=>{
-    if(responseWas == "correct"){
+  handleUserResponse = responseWas => {
+    if (responseWas == "correct") {
       this.setState({
-        correctAnswers: this.state.correctAnswers + 1, 
+        correctAnswers: this.state.correctAnswers + 1,
         onQuestion: this.state.onQuestion + 1
-      })
-    }else{
+      });
+    } else {
       this.setState({
         onQuestion: this.state.onQuestion + 1
-      })
+      });
     }
+  };
+
+  backToDeckHandler=()=>{
+    this.props.navigation.goBack();
   }
 
   render() {
-    
     let currentCard = this.state.cards[this.state.onQuestion];
     let question = "";
     let answer = "";
     let toDisplay = "";
     let currentQuestionCount = this.state.onQuestion + 1;
-    let percentageScore = (this.state.correctAnswers/this.state.totalQuestions) * 100;
-    
+    let percentageScore =
+      (this.state.correctAnswers / this.state.totalQuestions) * 100;
 
-    if(currentCard){
-      if(this.state.cardDisplay === "question"){
+    if (currentCard) {
+      if (this.state.cardDisplay === "question") {
         toDisplay = currentCard["question"];
-      }else{
+      } else {
         toDisplay = currentCard["answer"];
       }
     }
-    
-    if(this.state.onQuestion < this.state.totalQuestions){
-          return (
-            <View>
-              <View style={styles.card}>
-                <View style={styles.cardContent}>
-                  <Text>{`${currentQuestionCount}/${this.state.totalQuestions}`}</Text>
-                  <Text>{toDisplay}</Text>
-                </View>
-              </View>
-              <TouchableOpacity style={styles.answerButton}>
-                <Button
-                  color="blue"
-                  title="View Answer"
-                  onPress={this.viewAnswerHandler}
-                />
-              </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={()=>{this.handleUserResponse("correct")}}
-              >
-                <Text style={styles.btnText}>Correct</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity 
-                style={styles.btn} 
-                onPress={()=>{this.handleUserResponse("incorrect");}}>
-                <Text style={styles.btnText}>Incorrect</Text>
-              </TouchableOpacity>
+    if (this.state.onQuestion < this.state.totalQuestions) {
+      return (
+        <View>
+          <View style={styles.card}>
+            <View style={styles.cardContent}>
+              <Text>{`${currentQuestionCount}/${this.state.totalQuestions}`}</Text>
+              <Text>{toDisplay}</Text>
             </View>
-          );
-    }else{
+          </View>
+          <TouchableOpacity style={styles.answerButton}>
+            <Button
+              color="blue"
+              title="View Answer"
+              onPress={this.viewAnswerHandler}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              this.handleUserResponse("correct");
+            }}
+          >
+            <Text style={styles.btnText}>Correct</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              this.handleUserResponse("incorrect");
+            }}
+          >
+            <Text style={styles.btnText}>Incorrect</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
       return (
         <View>
           <View style={styles.card}>
@@ -114,7 +120,7 @@ class Quiz extends React.Component {
             <Button
               color="blue"
               title="Back to Deck"
-              // onPress={this.viewAnswerHandler}
+              onPress={this.backToDeckHandler}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.answerButton}>
@@ -127,7 +133,6 @@ class Quiz extends React.Component {
         </View>
       );
     }
-
   }
 }
 
