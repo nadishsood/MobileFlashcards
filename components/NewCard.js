@@ -11,7 +11,7 @@ class NewCard extends React.Component {
       answer: values.answer,
       question: values.question
     };
-    this.props.addCardToDeck(title, card);
+    this.props.addCardToDeck(title, card)
     this.props.navigation.navigate("DeckDetail", {
       item: this.props.decks[`${title}`]
     })
