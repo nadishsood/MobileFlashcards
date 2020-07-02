@@ -46,6 +46,7 @@ export default class Quiz extends React.Component {
     let answer = "";
     let toDisplay = "";
     let currentQuestionCount = this.state.onQuestion + 1;
+    let percentageScore = (this.state.correctAnswers/this.state.totalQuestions) * 100;
     console.log(currentCard);
     console.log(this.state.correctAnswers);
 
@@ -89,11 +90,15 @@ export default class Quiz extends React.Component {
             </View>
           );
     }else{
-      return(
-        <View>
-          <Text>Quiz khatam</Text>
+      return (
+        <View style={styles.card}>
+          <View style={styles.cardContent}>
+            <Text>Quiz Complete</Text>
+            <Text>{`You answered ${this.state.correctAnswers} out of ${this.state.totalQuestions} questions correctly.`}</Text>
+            <Text>{`Your percentage score: ${percentageScore}% `}</Text>
+          </View>
         </View>
-      )
+      );
     }
 
   }
