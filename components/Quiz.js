@@ -30,6 +30,14 @@ class Quiz extends React.Component {
     })
   }
 
+  restartQuizHandler=()=>{
+    this.setState({
+      onQuestion: 0,
+      correctAnswers: 0,
+      cardDisplay: "question"
+    })
+  }
+
   handleUserResponse=(responseWas)=>{
     if(responseWas == "correct"){
       this.setState({
@@ -51,8 +59,7 @@ class Quiz extends React.Component {
     let toDisplay = "";
     let currentQuestionCount = this.state.onQuestion + 1;
     let percentageScore = (this.state.correctAnswers/this.state.totalQuestions) * 100;
-    console.log(currentCard);
-    console.log(this.state.correctAnswers);
+    
 
     if(currentCard){
       if(this.state.cardDisplay === "question"){
@@ -95,12 +102,28 @@ class Quiz extends React.Component {
           );
     }else{
       return (
-        <View style={styles.card}>
-          <View style={styles.cardContent}>
-            <Text>Quiz Complete</Text>
-            <Text>{`You answered ${this.state.correctAnswers} out of ${this.state.totalQuestions} questions correctly.`}</Text>
-            <Text>{`Your percentage score: ${percentageScore}% `}</Text>
+        <View>
+          <View style={styles.card}>
+            <View style={styles.cardContent}>
+              <Text>Quiz Complete</Text>
+              <Text>{`You answered ${this.state.correctAnswers} out of ${this.state.totalQuestions} questions correctly.`}</Text>
+              <Text>{`Your percentage score: ${percentageScore}% `}</Text>
+            </View>
           </View>
+          <TouchableOpacity style={styles.answerButton}>
+            <Button
+              color="blue"
+              title="Back to Deck"
+              // onPress={this.viewAnswerHandler}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.answerButton}>
+            <Button
+              color="green"
+              title="Restart Quiz"
+              onPress={this.restartQuizHandler}
+            />
+          </TouchableOpacity>
         </View>
       );
     }
