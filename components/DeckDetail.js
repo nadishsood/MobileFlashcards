@@ -64,9 +64,8 @@ render() {
         </View>
       );
     }else{
-      return <View><Text>dsfsf</Text></View>
+      return <View><Text></Text></View>
     }
-  
   }
 }
 
