@@ -10,7 +10,7 @@ class Quiz extends React.Component {
     onQuestion: 0,
     totalQuestions: null,
     correctAnswers: 0,
-    cardDisplay: null
+    cardDisplay: "question"
   };
 
   componentDidMount() {
@@ -40,11 +40,13 @@ class Quiz extends React.Component {
     if (responseWas == "correct") {
       this.setState({
         correctAnswers: this.state.correctAnswers + 1,
-        onQuestion: this.state.onQuestion + 1
+        onQuestion: this.state.onQuestion + 1,
+        cardDisplay: "question"
       });
     } else {
       this.setState({
-        onQuestion: this.state.onQuestion + 1
+        onQuestion: this.state.onQuestion + 1,
+        cardDisplay: "question"
       });
     }
   };
@@ -54,6 +56,7 @@ class Quiz extends React.Component {
   }
 
   render() {
+    console.log(this.state.cardDisplay);
     let currentCard = this.state.cards[this.state.onQuestion];
     let question = "";
     let answer = "";
