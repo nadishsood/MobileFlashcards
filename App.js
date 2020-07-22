@@ -9,6 +9,9 @@ import NewCard from "./components/NewCard";
 import NewDeck from "./components/NewDeck";
 import ResetApp from "./components/ResetApp";
 
+import { saveLocalNotification } from "./notifications";
+
+
 
 
 import Quiz from "./components/Quiz";
@@ -59,29 +62,28 @@ const Tab = createBottomTabNavigator();
       };
 
 class App extends React.Component {
-
   //get all decks from asyncStorage
   //pass as props to tab screen home
   //recieve in homestackcomponent and pass it to Decklist
-  
 
-  //From Decklist pass it further via props 
+  //From Decklist pass it further via props
+  componentDidMount() {
+    saveLocalNotification();
+  }
 
-
-render(){
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeStack} />
-          <Tab.Screen name="NewDeck" component={NewDeckStack} />
-          <Tab.Screen name="ResetDecks" component={ResetAppStack} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
-}
-  
+  render() {
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeStack} />
+            <Tab.Screen name="NewDeck" component={NewDeckStack} />
+            <Tab.Screen name="ResetDecks" component={ResetAppStack} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
 
 export default App;
