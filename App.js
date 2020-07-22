@@ -8,13 +8,10 @@ import DeckDetail from "./components/DeckDetail";
 import NewCard from "./components/NewCard";
 import NewDeck from "./components/NewDeck";
 import ResetApp from "./components/ResetApp";
-
+import Quiz from "./components/Quiz";
 import { saveLocalNotification } from "./notifications";
 
 
-
-
-import Quiz from "./components/Quiz";
 
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
@@ -62,11 +59,6 @@ const Tab = createBottomTabNavigator();
       };
 
 class App extends React.Component {
-  //get all decks from asyncStorage
-  //pass as props to tab screen home
-  //recieve in homestackcomponent and pass it to Decklist
-
-  //From Decklist pass it further via props
   componentDidMount() {
     saveLocalNotification();
   }

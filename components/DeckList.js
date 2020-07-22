@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   SafeAreaView
 } from "react-native";
@@ -33,9 +31,6 @@ const handleDeckPress = (item, navigation) =>{
 }
 
 class DeckList extends React.Component {
-
-
-
   componentDidMount(){
     this.props.fetchDecks();
   }
@@ -84,11 +79,8 @@ const styles = StyleSheet.create({
 
 
   btnContainer: {
-    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // alignItems: 'center',
-    // width: '100%',
     marginBottom: 20
   },
   btn: {
@@ -115,24 +107,3 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps, { fetchDecks })(DeckList);
 
-
-{
-  /* <FlatList
-             data={decksArray}
-             renderItem={({ deck }) => (
-               <View>
-                 <Text>{deck}</Text>
-                 <Text>sdfsfsjkh</Text>
-               </View>
-             )}
-           /> */
-}
-{
-  /* {decksArray.map((deck)=>{
-             return(
-               <View>
-               <Text>{deck.title}</Text>
-               </View>
-             )
-           })} */
-}

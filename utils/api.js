@@ -27,7 +27,7 @@ export const getDeck = async (id) =>{
     }
 }
 
-//don't touch finalized. 
+
 export const saveDeckTitle = async (title) => {
   try {
     const res = await AsyncStorage.mergeItem(

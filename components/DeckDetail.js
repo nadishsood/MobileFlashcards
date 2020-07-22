@@ -69,7 +69,7 @@ render() {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     decks: state.decks.decks
   };

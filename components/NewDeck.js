@@ -16,8 +16,6 @@ class NewDeck extends React.Component {
    resetForm({values: ""})
 
   }
-
-
   render() {
     return (
       <View style={styles.container}>
@@ -48,14 +46,12 @@ class NewDeck extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     decks: state.decks.decks
   };
 };
 export default connect(mapStateToProps, { createNewDeck })(NewDeck);
-
-
 
 const styles = StyleSheet.create({
   container: {
