@@ -2,6 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
 
 import { connect } from "react-redux";
+import {
+  saveLocalNotification,
+  deleteLocalNotification
+} from "./../notifications";
 
 
 class Quiz extends React.Component {
@@ -15,6 +19,9 @@ class Quiz extends React.Component {
 
   componentDidMount() {
     console.log("I got called");
+    
+    deleteLocalNotification().then(saveLocalNotification);
+  
     this.setState({
       cards: this.props.deck.questions,
       onQuestion: 0,
